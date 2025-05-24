@@ -17,7 +17,7 @@ const ibmPlexSans = IBM_Plex_Sans({
 })
 
 export const metadata: Metadata = {
-  title: "CineHamster - Movie Streaming",
+  title: "ImoCinema - Movie Streaming",
   description: "Discover and watch movies with a clean, minimalistic interface",
 }
 
