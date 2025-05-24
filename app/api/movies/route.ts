@@ -131,7 +131,7 @@ export async function GET() {
       const $imdb = $element.find(".imdb");
 
       const href = $link.attr("href") || "";
-      const slug = href.split("/").filter(Boolean).pop() || "";
+      const cleanSlug = href.replace("https://ww25.soap2day.day/", "").replace("/", "");
       const poster = $img.attr("src") || $img.attr("data-original") || "/placeholder.svg";
       
       // Extract year from title if available
@@ -144,9 +144,10 @@ export async function GET() {
         title: title.replace(/\(\d{4}\)/, "").trim(),
         poster: poster,
         runtime: $runtime.text().trim(),
-        slug: slug,
+        slug: cleanSlug,
         year: year,
         imdbRating: $imdb.text().trim() || "",
+        link: cleanSlug // Use the clean slug as the link
       };
 
       movies.push(movie);
