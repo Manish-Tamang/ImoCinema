@@ -32,19 +32,16 @@ export async function POST(request: Request) {
       const year = $element.find(".mli-info span").first().text().trim();
       const imdb = $element.find(".mli-info span").last().text().trim();
 
-      // Extract clean slug from the link
-      const slug = link
-        .replace("https://ww25.soap2day.day/", "")
-        .replace("/", "")
-        .replace("-soap2day", "");
+      // Clean the URL to get just the movie name
+      const cleanSlug = link.replace("https://ww25.soap2day.day/", "").replace("/", "");
 
       results.push({
         title,
         image,
         year,
         imdb,
-        slug,
-        link,
+        slug: cleanSlug,
+        link: cleanSlug // Use the clean slug as the link
       });
     });
 
@@ -58,19 +55,16 @@ export async function POST(request: Request) {
       const year = $element.find(".mli-info span").first().text().trim();
       const imdb = $element.find(".mli-info span").last().text().trim();
 
-      // Extract clean slug from the link
-      const slug = link
-        .replace("https://ww25.soap2day.day/", "")
-        .replace("/", "")
-        .replace("-soap2day", "");
+      // Clean the URL to get just the movie name
+      const cleanSlug = link.replace("https://ww25.soap2day.day/", "").replace("/", "");
 
       results.push({
         title,
         image,
         year,
         imdb,
-        slug,
-        link,
+        slug: cleanSlug,
+        link: cleanSlug // Use the clean slug as the link
       });
     });
 
