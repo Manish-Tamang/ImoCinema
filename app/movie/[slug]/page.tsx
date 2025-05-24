@@ -29,7 +29,9 @@ export default function MovieDetailPage() {
       try {
         // Get the movie name from the slug and construct the full URL
         const movieName = params.slug as string;
-        const detailLink = `https://ww25.soap2day.day/${movieName}/`;
+        // Clean the slug if it contains the full URL
+        const cleanSlug = movieName.replace("https://ww25.soap2day.day/", "").replace("/", "");
+        const detailLink = `https://ww25.soap2day.day/${cleanSlug}/`;
         console.log("Fetching details for:", detailLink);
 
         const response = await fetch("/api/details", {
