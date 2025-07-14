@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} ${jetbrainsMono.variable} ${ibmPlexSans.variable}`}>
-        <div className="min-h-screen flex flex-col bg-gray-50">
+        <div className="min-h-screen flex flex-col bg-gradient-to-r from-[#f8f6ff] via-[#f3eaff] to-[#e9d8fd]">
           <Header />
           <main className="flex-1 w-full max-w-[815px] mx-auto px-4 py-8">{children}</main>
           <Footer />
