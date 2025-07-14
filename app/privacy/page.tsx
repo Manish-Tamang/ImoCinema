@@ -4,12 +4,12 @@ export default function PrivacyPage() {
       <h1 className="text-3xl font-bold text-gray-900">Privacy Policy</h1>
 
       <div className="prose prose-gray space-y-4">
-        <p className="text-sm text-gray-600">Last updated: January 2024</p>
+        <p className="text-sm text-gray-600">Last updated: July 2025</p>
 
         <section className="space-y-3">
           <h2 className="text-xl font-semibold text-gray-900">Information We Collect</h2>
           <p className="text-gray-700 leading-relaxed">
-            CineHamster does not collect personal information. We do not require user accounts or store any personal
+            ImoCinema does not collect personal information. We do not require user accounts or store any personal
             data. Your movie searches and viewing preferences are not tracked or stored.
           </p>
         </section>
