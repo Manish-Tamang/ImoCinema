@@ -18,8 +18,8 @@ interface MovieCardProps {
 export default function MovieCard({ movie }: MovieCardProps) {
   return (
     <Link href={`/movie/${movie.slug}`} className="group">
-      <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
-        <div className="aspect-[2/3] relative rounded-t-lg overflow-hidden bg-gray-100">
+      <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow w-full max-w-[180px] mx-auto">
+        <div className="aspect-[2/3] relative rounded-t-lg overflow-hidden bg-gray-100" style={{ minHeight: 180 }}>
           {movie.posterImage ? (
             <Image
               src={movie.posterImage}
@@ -38,19 +38,13 @@ export default function MovieCard({ movie }: MovieCardProps) {
             </div>
           )}
         </div>
-        <div className="p-4">
-          <h3 className="font-semibold text-gray-900 group-hover:text-black transition-colors line-clamp-1">
+        <div className="p-2">
+          <h3 className="font-semibold text-gray-900 group-hover:text-black transition-colors line-clamp-1 text-sm">
             {movie.title}
           </h3>
-          <div className="flex items-center gap-2 text-sm text-gray-600 mt-1">
+          {/* <div className="flex items-center gap-2 text-xs text-gray-600 mt-1">
             <span>{movie.year}</span>
-            {movie.imdbRating && (
-              <span className="flex items-center gap-1">
-                <Star className="fill-yellow-400 text-yellow-400" size={16} />
-                {movie.imdbRating}
-              </span>
-            )}
-          </div>
+          </div> */}
         </div>
       </div>
     </Link>
