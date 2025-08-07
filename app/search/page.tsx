@@ -4,6 +4,8 @@ import { useState, useEffect } from "react"
 import { Search, Loader2 } from "lucide-react"
 import MovieCard from "@/components/movie-card"
 import { MovieSearchResult } from "@/app/types/movie"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
 
 export default function SearchPage() {
   const [query, setQuery] = useState("")
@@ -32,7 +34,7 @@ export default function SearchPage() {
 
         const data = await response.json()
         console.log('Popular movies data:', data);
-        setMovies(data.slice(0, 9)) // Show 9 movies (3 rows of 3)
+        setMovies(data.slice(0, 12)) // Show 9 movies (3 rows of 3)
       } catch (err) {
         console.error('Error fetching popular movies:', err);
         setError("Failed to load popular movies. Please try again.")
@@ -61,7 +63,7 @@ export default function SearchPage() {
       if (response.ok) {
         const data = await response.json()
         console.log('Popular movies data:', data);
-        setMovies(data.slice(0, 9))
+        setMovies(data.slice(0, 12))
       }
       setHasSearched(false)
       return
@@ -101,38 +103,38 @@ export default function SearchPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 py-12 font-ibm-plex">
       {/* Header */}
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold mb-4">Find Your Next Movie</h1>
-        <p className="text-gray-600 max-w-2xl mx-auto">
-          Search through our extensive collection of movies and TV shows. Discover new titles, 
-          explore different genres, and find your next favorite entertainment.
+      <div className="text-center mb-8 space-y-3 font-ibm-plex">
+        <h1 className="text-4xl font-extrabold text-[#9748FF] drop-shadow-sm">Find Your Next Movie</h1>
+        <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          Search through our collection of movies and TV shows. Discover new titles, explore genres, and find your next favorite entertainment.
         </p>
       </div>
 
       {/* Search Form */}
-      <form onSubmit={handleSearch} className="mb-12 max-w-3xl mx-auto">
-        <div className="flex gap-3">
-          <div className="flex-1 relative">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-            <input
+      <form onSubmit={handleSearch} className="mb-10 max-w-lg mx-auto">
+        <div className="flex items-center max-w-md mx-auto gap-3">
+          <div className="relative flex-1">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+            <Input
+              placeholder="Search for movies..."
+              className="pl-10 border-gray-200 focus:border-[#9748FF] focus:ring-[#9748FF]"
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search for movies..."
-              className="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent outline-none placeholder-gray-500 text-gray-900"
+              disabled={loading}
             />
           </div>
-          <button
+          <Button
             type="submit"
+            className="bg-[#9748FF] hover:bg-[#8040E6] text-white min-w-[96px]"
             disabled={loading}
-            className="px-8 py-4 bg-black text-white rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 text-lg transition-colors"
           >
             {loading ? (
               <Loader2 className="animate-spin" size={20} />
             ) : (
               "Search"
             )}
-          </button>
+          </Button>
         </div>
       </form>
 
@@ -145,9 +147,17 @@ export default function SearchPage() {
 
       {/* Loading State */}
       {loading && (
-        <div className="text-center py-12">
-          <Loader2 className="animate-spin mx-auto mb-4 text-gray-900" size={40} />
-          <p className="text-gray-600 font-medium">Searching for movies...</p>
+        <div className="mt-10">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-4 lg:gap-5 font-ibm-plex">
+            {Array.from({ length: 12 }).map((_, i) => (
+              <div key={i} className="w-full max-w-[180px] mx-auto">
+                <div className="aspect-[2/3] relative rounded-t-lg overflow-hidden bg-gray-100 animate-pulse" style={{ minHeight: 180 }} />
+                <div className="p-2">
+                  <div className="h-4 bg-gray-200 rounded w-3/4 mb-2 animate-pulse" />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 
@@ -162,16 +172,16 @@ export default function SearchPage() {
       {/* Results */}
       {movies.length > 0 && (
         <div className="space-y-6">
-          <div className="bg-white rounded-lg p-6 shadow-sm">
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">
+          <div className="bg-white rounded-lg p-4 shadow-sm">
+            <h2 className="text-xl font-bold text-[#9748FF] mb-1">
               {hasSearched ? "Search Results" : "Popular Movies"}
             </h2>
-            <p className="text-gray-600">
+            <p className="text-gray-600 text-sm">
               {hasSearched ? `Found ${movies.length} movies matching your search` : "Trending movies you might enjoy"}
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4 lg:gap-5 font-ibm-plex">
             {movies.map((movie, index) => {
               // Extract the clean slug from the link and add -soap2day
               const cleanSlug = movie.link
