@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { Search, Loader2 } from "lucide-react";
 import MovieCard from "@/components/movie-card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 interface Movie {
   id: string;
@@ -33,7 +35,7 @@ export default function HomePage() {
           throw new Error("Failed to fetch movies");
         }
         const data = await response.json();
-        setMovies(data.slice(0, 9)); // Show latest 9 movies
+        setMovies(data.slice(0, 8)); // Show latest 8 movies
       } catch (err) {
         setError("Failed to load movies. Please try again.");
       } finally {
@@ -89,7 +91,7 @@ export default function HomePage() {
 
   return (
     <div className="py-8">
-      <div className="bg-white/90  p-8 shadow-lg border border-[#e0c8fa] max-w-3xl mx-auto">
+      <div className="max-w-3xl mx-auto">
         <div className="text-center space-y-6">
           <div className="space-y-3 font-ibm-plex">
             <h1 className="text-4xl font-extrabold text-[#9748FF] drop-shadow-sm">Hi there!</h1>
@@ -100,31 +102,29 @@ export default function HomePage() {
             </p>
           </div>
           <form onSubmit={handleSearch} className="max-w-lg mx-auto">
-            <div className="flex gap-3">
-              <div className="flex-1 relative">
-                <Search
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"
-                  size={20}
-                />
-                <input
+            <div className="flex items-center max-w-md mx-auto gap-3">
+              <div className="relative flex-1">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                <Input
+                  placeholder="Search for movies..."
+                  className="pl-10 border-gray-200 focus:border-[#9748FF] focus:ring-[#9748FF]"
                   type="text"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Search for movies..."
-                  className="w-full pl-12 pr-4 py-4 border border-[#e0c8fa] rounded-3xl focus:ring-2 focus:ring-[#9748FF] focus:border-transparent outline-none placeholder-gray-500 text-gray-900 bg-white/80 shadow-inner"
+                  disabled={loading}
                 />
               </div>
-              <button
+              <Button
                 type="submit"
+                className="bg-[#9748FF] hover:bg-[#8040E6] text-white min-w-[96px]"
                 disabled={loading}
-                className="w-40 h-12 bg-white cursor-pointer rounded-3xl border-2 border-[#9748FF] shadow-[inset_0px_-2px_0px_1px_#9748FF] group hover:bg-[#9748FF] transition duration-300 ease-in-out flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? (
                   <Loader2 className="animate-spin" size={20} />
                 ) : (
-                  <span className="font-medium text-[#333] group-hover:text-white">Search</span>
+                  "Search"
                 )}
-              </button>
+              </Button>
             </div>
           </form>
         </div>
@@ -134,9 +134,17 @@ export default function HomePage() {
           </div>
         )}
         {loading && !hasSearched && (
-          <div className="text-center py-8">
-            <Loader2 className="animate-spin mx-auto mb-4 text-[#9748FF]" size={40} />
-            <p className="text-gray-600 font-medium">Loading movies...</p>
+          <div className="mt-10">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-4 lg:gap-5 font-ibm-plex">
+              {Array.from({ length: 8 }).map((_, i) => (
+                <div key={i} className="w-full max-w-[180px] mx-auto">
+                  <div className="aspect-[2/3] relative rounded-t-lg overflow-hidden bg-gray-100 animate-pulse" style={{ minHeight: 180 }} />
+                  <div className="p-2">
+                    <div className="h-4 bg-gray-200 rounded w-3/4 mb-2 animate-pulse" />
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         )}
         {!loading && hasSearched && movies.length === 0 && !error && (
@@ -149,7 +157,7 @@ export default function HomePage() {
         {movies.length > 0 && (
           <div className="mt-10">
             <h2 className="text-2xl font-bold text-[#9748FF] mb-4 text-left">New Movies</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 font-ibm-plex">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-4 lg:gap-5 font-ibm-plex">
               {movies.map((movie) => (
                 <MovieCard
                   key={movie.id}
@@ -157,7 +165,7 @@ export default function HomePage() {
                     id: movie.id,
                     title: movie.title,
                     posterImage: movie.poster,
-                    year: movie.year,
+                    year: "",
                     imdbRating: "",
                     slug: movie.slug,
                   }}
