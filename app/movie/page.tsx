@@ -28,7 +28,7 @@ export default function MoviePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const moviesPerPage = 9;
+  const moviesPerPage = 12;
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -76,10 +76,15 @@ export default function MoviePage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 font-ibm-plex">
-      <h1 className="text-3xl font-bold mb-8">Movies</h1>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="max-w-7xl mx-auto px-4 py-10 font-ibm-plex">
+      <div className="text-center mb-8 space-y-3">
+        <h1 className="text-4xl font-extrabold text-[#9748FF] drop-shadow-sm">Movies</h1>
+        <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          Browse our collection of movies. Discover trending, new, and classic films to enjoy anytime.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-4 lg:gap-5">
         {currentMovies.map((movie) => (
           <MovieCard
             key={movie.id}
@@ -88,7 +93,7 @@ export default function MoviePage() {
               title: movie.title,
               posterImage: movie.poster,
               year: movie.year,
-              imdbRating: "", // We'll add this back when we can scrape it
+              imdbRating: "",
               slug: movie.slug,
             }}
           />
