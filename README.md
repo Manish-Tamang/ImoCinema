@@ -85,13 +85,6 @@ ImoCinema/
 - **Performance**: Optimized loading with skeleton states
 - **Responsiveness**: Adaptive layouts for all devices
 
-## 🔧 Available Scripts
-
-- `pnpm dev` - Start development server
-- `pnpm build` - Build for production
-- `pnpm start` - Start production server
-- `pnpm lint` - Run ESLint
-- `pnpm type-check` - Run TypeScript type checking
 
 ## 📱 Responsive Breakpoints
 
@@ -116,30 +109,10 @@ ImoCinema/
 - Real-time search results
 - Skeleton loading states
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 👨‍💻 Author
-
-**Manish Tamang**
-- GitHub: [@Manish-Tamang](https://github.com/Manish-Tamang)
-- Website: [manishtamang.com](https://www.manishtamang.com)
 
 ## 🙏 Acknowledgments
 
-- Next.js team for the amazing framework
-- Tailwind CSS for the utility-first CSS framework
-- Radix UI for accessible component primitives
-- Lucide for beautiful icons
+- [Milan Bhandari (@milancodess)](https://github.com/milancodess) for the movie scraping logic from Soap2Day
 
 ---
 
